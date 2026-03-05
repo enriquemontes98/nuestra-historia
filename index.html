@@ -19,7 +19,6 @@ color:white;
 overflow:hidden;
 }
 
-/* CORAZONES */
 #corazones{
 position:fixed;
 width:100%;
@@ -126,7 +125,6 @@ font-size:18px;
 
 <div id="corazones"></div>
 
-<!-- LOGIN -->
 <div class="container" id="login">
 
 <h2>❤️ Solo tú sabes la fecha ❤️</h2>
@@ -137,7 +135,6 @@ font-size:18px;
 
 </div>
 
-<!-- APP -->
 <div class="container hidden" id="app">
 
 <div class="corazon">❤️</div>
@@ -145,14 +142,12 @@ font-size:18px;
 <h3>Llevamos juntos:</h3>
 <div id="contador"></div>
 
-<img id="foto" src="img/foto1.jpg">
+<img id="foto" src="foto1.JPG">
 <div id="mensaje"></div>
 
 </div>
 
 <script>
-
-/* ===== CONFIG ===== */
 
 const fechaCorrecta="12/05/2023";
 const fechaInicio=new Date(2023,4,12);
@@ -162,7 +157,7 @@ const fotos=[
 "foto2.JPG",
 "foto3.JPG",
 "foto4.JPG",
-"foto.JPG"
+"foto5.JPG"
 ];
 
 const mensajes=[
@@ -172,8 +167,6 @@ const mensajes=[
 "Nuestro amor es mi mejor historia.",
 "Siempre tú, siempre nosotros."
 ];
-
-/* ===== TECLADO ===== */
 
 const teclado=document.getElementById("teclado");
 let entrada="";
@@ -205,8 +198,6 @@ desbloquear();
 }
 }
 
-/* ===== DESBLOQUEO ===== */
-
 function desbloquear(){
 
 login.classList.add("hidden");
@@ -220,8 +211,6 @@ iniciarMensajes();
 
 setInterval(crearCorazon,350);
 }
-
-/* ===== CONTADOR ===== */
 
 function iniciarContador(){
 
@@ -251,8 +240,6 @@ contador.innerText=
 },1000);
 }
 
-/* ===== FOTOS (FADE CINEMÁTICO) ===== */
-
 let f=0;
 const foto=document.getElementById("foto");
 
@@ -270,8 +257,6 @@ foto.style.opacity=1;
 
 },6000);
 }
-
-/* ===== MENSAJES ===== */
 
 let m=0;
 
@@ -292,8 +277,6 @@ function iniciarMensajes(){
 escribir(mensajes[0]);
 }
 
-/* ===== CORAZONES ===== */
-
 function crearCorazon(){
 const c=document.createElement("div");
 c.className="corazonFloat";
@@ -308,5 +291,3 @@ setTimeout(()=>c.remove(),6000);
 
 </body>
 </html>
-
-
