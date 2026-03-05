@@ -20,7 +20,6 @@ overflow:hidden;
 }
 
 /* CORAZONES */
-
 #corazones{
 position:fixed;
 width:100%;
@@ -88,6 +87,8 @@ img{
 width:100%;
 border-radius:15px;
 margin-top:15px;
+opacity:1;
+transition:opacity 1.5s ease;
 }
 
 .corazon{
@@ -126,7 +127,6 @@ font-size:18px;
 <div id="corazones"></div>
 
 <!-- LOGIN -->
-
 <div class="container" id="login">
 
 <h2>❤️ Solo tú sabes la fecha ❤️</h2>
@@ -138,7 +138,6 @@ font-size:18px;
 </div>
 
 <!-- APP -->
-
 <div class="container hidden" id="app">
 
 <div class="corazon">❤️</div>
@@ -146,25 +145,24 @@ font-size:18px;
 <h3>Llevamos juntos:</h3>
 <div id="contador"></div>
 
-<img id="foto" src="foto1.JPG">
-
+<img id="foto" src="img/foto1.jpg">
 <div id="mensaje"></div>
 
 </div>
 
 <script>
 
-/* CONFIG */
+/* ===== CONFIG ===== */
 
 const fechaCorrecta="12/05/2023";
 const fechaInicio=new Date(2023,4,12);
 
 const fotos=[
-"foto1.JPG",
-"foto2.JPG",
-"foto3.JPG",
-"foto4.JPG",
-"foto5.JPG"
+"img/foto1.jpg",
+"img/foto2.jpg",
+"img/foto3.jpg",
+"img/foto4.jpg",
+"img/foto.jpg"
 ];
 
 const mensajes=[
@@ -175,17 +173,9 @@ const mensajes=[
 "Siempre tú, siempre nosotros."
 ];
 
-/* TECLADO */
+/* ===== TECLADO ===== */
 
 const teclado=document.getElementById("teclado");
-const pantalla=document.getElementById("pantalla");
-const login=document.getElementById("login");
-const app=document.getElementById("app");
-const contador=document.getElementById("contador");
-const foto=document.getElementById("foto");
-const mensaje=document.getElementById("mensaje");
-const corazones=document.getElementById("corazones");
-
 let entrada="";
 
 ["1","2","3","4","5","6","7","8","9","❤️","0","⌫"]
@@ -213,29 +203,25 @@ pantalla.innerText=formatear(entrada)||"__/__/____";
 if(formatear(entrada)===fechaCorrecta){
 desbloquear();
 }
-
 }
 
-/* DESBLOQUEAR */
+/* ===== DESBLOQUEO ===== */
 
 function desbloquear(){
 
 login.classList.add("hidden");
 app.classList.remove("hidden");
 
-setTimeout(()=>{
-contador.classList.add("visible");
-},300);
+setTimeout(()=>contador.classList.add("visible"),300);
 
 iniciarContador();
 iniciarFotos();
 iniciarMensajes();
 
 setInterval(crearCorazon,350);
-
 }
 
-/* CONTADOR */
+/* ===== CONTADOR ===== */
 
 function iniciarContador(){
 
@@ -263,62 +249,59 @@ contador.innerText=
 `${mesesTotales} meses, ${dias} días y ${horas} horas ❤️`;
 
 },1000);
-
 }
 
-/* FOTOS */
+/* ===== FOTOS (FADE CINEMÁTICO) ===== */
 
 let f=0;
+const foto=document.getElementById("foto");
 
 function iniciarFotos(){
+
 setInterval(()=>{
+
+foto.style.opacity=0;
+
+setTimeout(()=>{
 f=(f+1)%fotos.length;
 foto.src=fotos[f];
-},4000);
+foto.style.opacity=1;
+},800);
+
+},6000);
 }
 
-/* MENSAJES */
+/* ===== MENSAJES ===== */
 
 let m=0;
 
 function escribir(texto,i=0){
-
 if(i<texto.length){
-
 mensaje.innerHTML+=texto.charAt(i);
 setTimeout(()=>escribir(texto,i+1),45);
-
 }else{
-
 setTimeout(()=>{
 mensaje.innerHTML="";
 m=(m+1)%mensajes.length;
 escribir(mensajes[m]);
 },2500);
-
 }
-
 }
 
 function iniciarMensajes(){
 escribir(mensajes[0]);
 }
 
-/* CORAZONES */
+/* ===== CORAZONES ===== */
 
 function crearCorazon(){
-
 const c=document.createElement("div");
 c.className="corazonFloat";
 c.innerText="❤️";
-
 c.style.left=Math.random()*100+"vw";
 c.style.animationDuration=(3+Math.random()*3)+"s";
-
 corazones.appendChild(c);
-
 setTimeout(()=>c.remove(),6000);
-
 }
 
 </script>
